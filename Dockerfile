@@ -13,10 +13,10 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 8080 9090
 
-VOLUME ["/config", "/data/complete", "/data/incomplete"]
+VOLUME ["/sabnzbd_data", "/data/complete", "/data/incomplete"]
 
 ENTRYPOINT ["/usr/bin/sabnzbdplus", \
 						"--server", "0.0.0.0:8080", \
 						"--https", "9090", \
 						"--browser", "0", \
-						"--config-file", "/config"]
+						"--config-file", "/sabnzbd_data"]
