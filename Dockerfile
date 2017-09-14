@@ -1,17 +1,21 @@
 FROM ubuntu
 
 #add  software-properties-common for add-apt-repository
-RUN apt-get install -y software-properties-common
+RUN apt-get update \
+ && apt-get install -y software-properties-common \
 #Needed for unrar
-RUN apt-add-repository multiverse
+ && apt-add-repository multiverse \
 #This line is optional but that repo has a more recent version than multiverse
-RUN apt-add-repository ppa:jcfp/ppa
-RUN apt-get update
-RUN apt-get install -y sabnzbdplus unrar
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ && apt-add-repository ppa:jcfp/ppa \
+ && apt-add-repository ppa:jcfp/sab-addons \
+ && apt-get update \
+ && apt-get install -y sabnzbdplus python-sabyenc unrar \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 8080 9090
+
+ENV LANG C.UTF-8
 
 VOLUME ["/sabnzbd_data", "/data/complete", "/data/incomplete"]
 
